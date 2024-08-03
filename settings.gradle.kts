@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PortalAdventureApp"
 include(":app")
- 
+include(":design-system")
