@@ -71,7 +71,7 @@ fun ButtonLargeView(
         shape = RoundedCornerShape(10.dp)
     ) {
         Icon(
-            modifier = iconModifier,
+            modifier = iconModifier.padding(top = 10.dp, bottom = 10.dp),
             imageVector = icon,
             tint = iconTint,
             contentDescription = contentDescription

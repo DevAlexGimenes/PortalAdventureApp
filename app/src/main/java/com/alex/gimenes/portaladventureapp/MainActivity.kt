@@ -3,8 +3,7 @@ package com.alex.gimenes.portaladventureapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -23,17 +22,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.alex.gimenes.portaladventureapp.about.AboutScreenView
+import com.alex.gimenes.portaladventureapp.bottom.navigation.about.AboutScreenView
 import com.alex.gimenes.portaladventureapp.design_system.themes.PortalAdventureAppTheme
 import com.alex.gimenes.portaladventureapp.design_system.view.navigation.BottomNavigationBar
 import com.alex.gimenes.portaladventureapp.design_system.view.navigation.NavigationItem
-import com.alex.gimenes.portaladventureapp.favorites.FavoriteScreenView
-import com.alex.gimenes.portaladventureapp.home.HomeScreenView
+import com.alex.gimenes.portaladventureapp.bottom.navigation.favorites.FavoriteScreenView
+import com.alex.gimenes.portaladventureapp.bottom.navigation.home.HomeScreenView
 
 class MainActivity : ComponentActivity() {
 
@@ -86,15 +84,9 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { innerPadding ->
-                    Box(
-                        modifier = Modifier.padding(
-                            PaddingValues(
-                                0.dp,
-                                0.dp,
-                                0.dp,
-                                innerPadding.calculateBottomPadding()
-                            )
-                        )
+                    Column(
+                        modifier = Modifier
+                            .padding(innerPadding)
                     ) {
                         NavHost(
                             navController = navController,
@@ -103,7 +95,14 @@ class MainActivity : ComponentActivity() {
                             composable(NavigationItem.Home.route) {
                                 selectedItem = NavigationItem.Home.title
                                 show = false
-                                HomeScreenView()
+                                HomeScreenView(
+                                    onRandomCharacter = {
+
+                                    },
+                                    onSearchCharacter = {
+
+                                    }
+                                )
                             }
                             composable(NavigationItem.Favorites.route) {
                                 selectedItem = NavigationItem.Favorites.title
