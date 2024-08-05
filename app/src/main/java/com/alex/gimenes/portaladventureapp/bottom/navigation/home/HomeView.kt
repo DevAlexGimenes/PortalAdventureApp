@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.alex.gimenes.portaladventureapp.R
@@ -30,13 +31,19 @@ fun HomeScreenView(
         Image(
             modifier = Modifier.size(250.dp),
             painter = painterResource(id = R.drawable.ic_rick_and_morty),
-            contentDescription = "Rick and Morty Image"
+            contentDescription = stringResource(id = R.string.home_image_description)
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
-        ButtonLargeView(text = "Random", icon = ImageVector.vectorResource(id = R.drawable.ic_shuffle) ) {
+        ButtonLargeView(
+            text = stringResource(id = R.string.home_button_random_option),
+            icon = ImageVector.vectorResource(id = R.drawable.ic_shuffle)
+        ) {
             onRandomCharacter()
         }
-        ButtonLargeView(text = "Search characters", icon = Icons.Default.Search) {
+        ButtonLargeView(
+            text = stringResource(id = R.string.home_button_search_option),
+            icon = Icons.Default.Search
+        ) {
             onSearchCharacter()
         }
     }

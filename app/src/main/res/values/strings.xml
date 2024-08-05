@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">PortalAdventureApp</string>
+    <string name="top_bar_icon_description">Icon back</string>
+    <string name="top_bar_title_random_character">Random character</string>
+    <string name="top_bar_title_character_details">Character details</string>
+
+    <!-- Home -->
+    <string name="home_image_description">Rick and Morty image</string>
+    <string name="home_button_random_option">Random</string>
+    <string name="home_button_search_option">Search characters</string>
+
+    <!-- Character Details -->
+    <string name="details_label_name">Name</string>
+    <string name="details_label_status">Status</string>
+    <string name="details_label_species">Species</string>
+    <string name="details_label_gender">Gender</string>
+    <string name="details_image_profile_description">Profile image</string>
+    <string name="detail_feedback_error_title">Sorry!</string>
+    <string name="detail_feedback_error_description">We could not get your character, try again!</string>
+    <string name="detail_feedback_error_button_text">Try again</string>
 </resources>

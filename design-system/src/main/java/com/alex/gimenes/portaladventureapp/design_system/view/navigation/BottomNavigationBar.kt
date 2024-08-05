@@ -1,6 +1,5 @@
 package com.alex.gimenes.portaladventureapp.design_system.view.navigation
 
-import android.provider.CalendarContract.Colors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -9,6 +8,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -17,7 +17,7 @@ import com.alex.gimenes.portaladventureapp.design_system.colors.CyanB7DFDF
 
 @Composable
 fun BottomNavigationBar(navController: NavController, items: List<NavigationItem>) {
-    var selectedItem by remember { mutableStateOf(0) }
+    var selectedItem by remember { mutableIntStateOf(0) }
     var currentRoute by remember { mutableStateOf(NavigationItem.Home.route) }
 
     items.forEachIndexed { index, navigationItem ->
@@ -32,10 +32,10 @@ fun BottomNavigationBar(navController: NavController, items: List<NavigationItem
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 alwaysShowLabel = true,
-                icon = { Icon(item.icon!!, contentDescription = item.title) },
+                icon = { Icon(item.icon, contentDescription = item.route) },
                 label = {
                     Text(
-                        text = item.title,
+                        text = item.route,
                         style = MaterialTheme.typography.bodyMedium
                     )
                 },
