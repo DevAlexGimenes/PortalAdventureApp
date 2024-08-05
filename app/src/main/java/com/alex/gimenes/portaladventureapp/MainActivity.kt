@@ -32,7 +32,11 @@ import com.alex.gimenes.portaladventureapp.design_system.view.navigation.BottomN
 import com.alex.gimenes.portaladventureapp.design_system.view.navigation.NavigationItem
 import com.alex.gimenes.portaladventureapp.bottom.navigation.favorites.FavoriteScreenView
 import com.alex.gimenes.portaladventureapp.bottom.navigation.home.HomeScreenView
+import com.alex.gimenes.portaladventureapp.selection.random.presentation.view.RandomCharacterRoute
+import com.alex.gimenes.portaladventureapp.selection.random.presentation.view.RandomCharacterView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +47,8 @@ class MainActivity : ComponentActivity() {
             PortalAdventureAppTheme {
                 val navController = rememberNavController()
                 var selectedItem by remember { mutableStateOf("") }
-                var show by remember { mutableStateOf(false) }
+                var showTopAppBar by remember { mutableStateOf(false) }
+                var showBottomAppBar by remember { mutableStateOf(false) }
 
                 Scaffold(
                     topBar = {
@@ -57,7 +62,7 @@ class MainActivity : ComponentActivity() {
                             },
                             colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.secondary),
                             navigationIcon = {
-                                if (show) {
+                                if (showTopAppBar) {
                                     IconButton(onClick = { navController.popBackStack() }) {
                                         Icon(
                                             imageVector = Icons.Default.ArrowBack,
@@ -69,18 +74,20 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        BottomAppBar(
-                            modifier = Modifier,
-                            containerColor = MaterialTheme.colorScheme.primary
-                        ) {
-                            BottomNavigationBar(
-                                navController = navController,
-                                items = listOf(
-                                    NavigationItem.Home,
-                                    NavigationItem.Favorites,
-                                    NavigationItem.About
+                        if (showBottomAppBar) {
+                            BottomAppBar(
+                                modifier = Modifier,
+                                containerColor = MaterialTheme.colorScheme.primary
+                            ) {
+                                BottomNavigationBar(
+                                    navController = navController,
+                                    items = listOf(
+                                        NavigationItem.Home,
+                                        NavigationItem.Favorites,
+                                        NavigationItem.About
+                                    )
                                 )
-                            )
+                            }
                         }
                     }
                 ) { innerPadding ->
@@ -94,10 +101,11 @@ class MainActivity : ComponentActivity() {
                         ) {
                             composable(NavigationItem.Home.route) {
                                 selectedItem = NavigationItem.Home.title
-                                show = false
+                                showTopAppBar = false
+                                showBottomAppBar = true
                                 HomeScreenView(
                                     onRandomCharacter = {
-
+                                        navController.navigate(RandomCharacterRoute)
                                     },
                                     onSearchCharacter = {
 
@@ -106,13 +114,23 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(NavigationItem.Favorites.route) {
                                 selectedItem = NavigationItem.Favorites.title
-                                show = false
+                                showTopAppBar = false
+                                showBottomAppBar = true
                                 FavoriteScreenView()
                             }
                             composable(NavigationItem.About.route) {
                                 selectedItem = NavigationItem.About.title
-                                show = false
+                                showTopAppBar = false
+                                showBottomAppBar = true
                                 AboutScreenView()
+                            }
+                            composable<RandomCharacterRoute> {
+                                selectedItem = "Random character"
+                                showTopAppBar = true
+                                showBottomAppBar = false
+                                RandomCharacterView {
+
+                                }
                             }
                         }
                     }
