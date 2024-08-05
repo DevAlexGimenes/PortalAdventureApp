@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -60,12 +61,12 @@ fun CharacterDetailsScreen(
 
         is State.Error -> {
             FeedbackView(
-                title = "Sorry!",
-                description = "We could not get your character, try again!",
-                painter = painterResource(id = R.drawable.ic_morty_smith),
+                title = stringResource(id = R.string.detail_feedback_error_title),
+                description = stringResource(id = R.string.detail_feedback_error_description),
+                painter = painterResource(id = R.drawable.ic_error_rick_and_morty),
                 icon = Icons.Rounded.Info,
                 iconTint = Color.Red,
-                textButton = "Try again!",
+                textButton = stringResource(id = R.string.detail_feedback_error_button_text),
                 colorButton = Color.Red,
                 onPositiveButton = onError
             )
@@ -94,7 +95,7 @@ fun CharacterProfile(character: CharacterDetails) {
         ) {
             AsyncImage(
                 model = character.image,
-                contentDescription = "Rick Image",
+                contentDescription = stringResource(id = R.string.details_image_profile_description),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(200.dp)
@@ -110,7 +111,11 @@ fun CharacterProfile(character: CharacterDetails) {
             contentAlignment = Alignment.CenterStart
         ) {
             Column(modifier = Modifier.padding(15.dp)) {
-                TextLabelInfo("Name:", character.name!!, MaterialTheme.colorScheme.onSecondary)
+                TextLabelInfo(
+                    stringResource(id = R.string.details_label_name),
+                    character.name,
+                    MaterialTheme.colorScheme.onSecondary
+                )
             }
         }
 
@@ -123,9 +128,17 @@ fun CharacterProfile(character: CharacterDetails) {
             contentAlignment = Alignment.CenterStart
         ) {
             Column(modifier = Modifier.padding(15.dp)) {
-                CharacterStatus(character.status!!)
-                TextLabelInfo("Species:", character.species!!, labelColor = GRAY6A6A6A)
-                TextLabelInfo("Gender:", character.gender!!, labelColor = GRAY6A6A6A)
+                CharacterStatus(character.status)
+                TextLabelInfo(
+                    stringResource(id = R.string.details_label_species),
+                    character.species,
+                    labelColor = GRAY6A6A6A
+                )
+                TextLabelInfo(
+                    stringResource(id = R.string.details_label_gender),
+                    character.gender,
+                    labelColor = GRAY6A6A6A
+                )
             }
         }
     }
@@ -135,15 +148,30 @@ fun CharacterProfile(character: CharacterDetails) {
 fun CharacterStatus(status: String) {
     when (status) {
         "Alive" -> {
-            TextLabelInfo("Status:", status, labelColor = GRAY6A6A6A, valueColor = Color.Green)
+            TextLabelInfo(
+                stringResource(id = R.string.details_label_status),
+                status,
+                labelColor = GRAY6A6A6A,
+                valueColor = Color.Green
+            )
         }
 
         "Dead" -> {
-            TextLabelInfo("Status:", status, labelColor = GRAY6A6A6A, valueColor = Color.Red)
+            TextLabelInfo(
+                stringResource(id = R.string.details_label_status),
+                status,
+                labelColor = GRAY6A6A6A,
+                valueColor = Color.Red
+            )
         }
 
         else -> {
-            TextLabelInfo("Status:", status, labelColor = GRAY6A6A6A, valueColor = Color.Gray)
+            TextLabelInfo(
+                stringResource(id = R.string.details_label_status),
+                status,
+                labelColor = GRAY6A6A6A,
+                valueColor = Color.Gray
+            )
         }
     }
 }

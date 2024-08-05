@@ -11,17 +11,16 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class NavigationItem(
     var route: String,
-    @Contextual val icon: ImageVector?,
-    var title: String
+    @Contextual val icon: ImageVector
 ) {
     @Serializable
-    object Home : NavigationItem(HOME, Icons.Rounded.Home, "Home")
+    data object Home : NavigationItem(HOME, Icons.Rounded.Home)
 
     @Serializable
-    object Favorites : NavigationItem(FAVORITES, Icons.Rounded.Favorite, "Favorites")
+    data object Favorites : NavigationItem(FAVORITES, Icons.Rounded.Favorite)
 
     @Serializable
-    object About : NavigationItem(ABOUT, Icons.Rounded.Info, "About")
+    data object About : NavigationItem(ABOUT, Icons.Rounded.Info)
 }
 
 const val HOME = "Home"

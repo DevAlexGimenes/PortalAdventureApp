@@ -27,6 +27,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.alex.gimenes.portaladventureapp.R
 import com.alex.gimenes.portaladventureapp.bottom.navigation.about.AboutScreenView
 import com.alex.gimenes.portaladventureapp.design_system.themes.PortalAdventureAppTheme
 import com.alex.gimenes.portaladventureapp.design_system.view.navigation.BottomNavigationBar
@@ -69,7 +70,7 @@ class MainActivity : ComponentActivity() {
                                     IconButton(onClick = { navController.popBackStack() }) {
                                         Icon(
                                             imageVector = Icons.Default.ArrowBack,
-                                            contentDescription = ""
+                                            contentDescription = getString(R.string.top_bar_icon_description)
                                         )
                                     }
                                 }
@@ -103,7 +104,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = NavigationItem.Home.route
                         ) {
                             composable(NavigationItem.Home.route) {
-                                titleTopAppBar = NavigationItem.Home.title
+                                titleTopAppBar = NavigationItem.Home.route
                                 showTopAppBar = false
                                 showBottomAppBar = true
                                 HomeScreenView(
@@ -116,19 +117,19 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable(NavigationItem.Favorites.route) {
-                                titleTopAppBar = NavigationItem.Favorites.title
+                                titleTopAppBar = NavigationItem.Favorites.route
                                 showTopAppBar = false
                                 showBottomAppBar = true
                                 FavoriteScreenView()
                             }
                             composable(NavigationItem.About.route) {
-                                titleTopAppBar = NavigationItem.About.title
+                                titleTopAppBar = NavigationItem.About.route
                                 showTopAppBar = false
                                 showBottomAppBar = true
                                 AboutScreenView()
                             }
                             composable<RandomCharacterRoute> {
-                                titleTopAppBar = "Random character"
+                                titleTopAppBar = getString(R.string.top_bar_title_random_character)
                                 showTopAppBar = true
                                 showBottomAppBar = false
                                 RandomCharacterView { randomNumber ->
@@ -137,7 +138,7 @@ class MainActivity : ComponentActivity() {
                             }
                             composable<CharacterDetailsRoute> {
                                 val args = it.toRoute<CharacterDetailsRoute>()
-                                titleTopAppBar = "Character details"
+                                titleTopAppBar = getString(R.string.top_bar_title_character_details)
                                 showTopAppBar = true
                                 showBottomAppBar = false
                                 CharacterDetailsScreen(
