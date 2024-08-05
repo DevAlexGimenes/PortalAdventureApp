@@ -34,9 +34,8 @@ import kotlinx.serialization.Serializable
 @Composable
 fun RandomCharacterView(
     viewModel: RandomCharacterViewModel = hiltViewModel(),
-    onClickToContinue: () -> Unit
+    onClickToContinue: (Int) -> Unit
 ) {
-
     val randomNumber = viewModel.randomNumber.observeAsState()
 
     Column(
@@ -86,7 +85,9 @@ fun RandomCharacterView(
             icon = Icons.Rounded.Info
         )
         ButtonLargeView(text = "Continue") {
-            onClickToContinue()
+            randomNumber.value?.let {
+                onClickToContinue(it)
+            }
         }
     }
 }
