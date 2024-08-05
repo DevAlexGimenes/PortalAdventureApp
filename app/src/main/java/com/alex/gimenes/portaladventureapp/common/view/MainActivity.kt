@@ -1,4 +1,4 @@
-package com.alex.gimenes.portaladventureapp
+package com.alex.gimenes.portaladventureapp.common.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,12 +26,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.alex.gimenes.portaladventureapp.bottom.navigation.about.AboutScreenView
 import com.alex.gimenes.portaladventureapp.design_system.themes.PortalAdventureAppTheme
 import com.alex.gimenes.portaladventureapp.design_system.view.navigation.BottomNavigationBar
 import com.alex.gimenes.portaladventureapp.design_system.view.navigation.NavigationItem
 import com.alex.gimenes.portaladventureapp.bottom.navigation.favorites.FavoriteScreenView
 import com.alex.gimenes.portaladventureapp.bottom.navigation.home.HomeScreenView
+import com.alex.gimenes.portaladventureapp.details.presentation.view.CharacterDetailsRoute
+import com.alex.gimenes.portaladventureapp.details.presentation.view.CharacterDetailsScreen
 import com.alex.gimenes.portaladventureapp.selection.random.presentation.view.RandomCharacterRoute
 import com.alex.gimenes.portaladventureapp.selection.random.presentation.view.RandomCharacterView
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +49,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PortalAdventureAppTheme {
                 val navController = rememberNavController()
-                var selectedItem by remember { mutableStateOf("") }
+                var titleTopAppBar by remember { mutableStateOf("") }
                 var showTopAppBar by remember { mutableStateOf(false) }
                 var showBottomAppBar by remember { mutableStateOf(false) }
 
@@ -56,8 +59,8 @@ class MainActivity : ComponentActivity() {
                             title = {
                                 Text(
                                     textAlign = TextAlign.Center,
-                                    text = selectedItem,
-                                    style = MaterialTheme.typography.titleMedium
+                                    text = titleTopAppBar,
+                                    style = MaterialTheme.typography.bodyLarge
                                 )
                             },
                             colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.secondary),
@@ -100,7 +103,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = NavigationItem.Home.route
                         ) {
                             composable(NavigationItem.Home.route) {
-                                selectedItem = NavigationItem.Home.title
+                                titleTopAppBar = NavigationItem.Home.title
                                 showTopAppBar = false
                                 showBottomAppBar = true
                                 HomeScreenView(
@@ -113,24 +116,33 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable(NavigationItem.Favorites.route) {
-                                selectedItem = NavigationItem.Favorites.title
+                                titleTopAppBar = NavigationItem.Favorites.title
                                 showTopAppBar = false
                                 showBottomAppBar = true
                                 FavoriteScreenView()
                             }
                             composable(NavigationItem.About.route) {
-                                selectedItem = NavigationItem.About.title
+                                titleTopAppBar = NavigationItem.About.title
                                 showTopAppBar = false
                                 showBottomAppBar = true
                                 AboutScreenView()
                             }
                             composable<RandomCharacterRoute> {
-                                selectedItem = "Random character"
+                                titleTopAppBar = "Random character"
                                 showTopAppBar = true
                                 showBottomAppBar = false
-                                RandomCharacterView {
-
+                                RandomCharacterView { randomNumber ->
+                                    navController.navigate(CharacterDetailsRoute(randomNumber))
                                 }
+                            }
+                            composable<CharacterDetailsRoute> {
+                                val args = it.toRoute<CharacterDetailsRoute>()
+                                titleTopAppBar = "Character details"
+                                showTopAppBar = true
+                                showBottomAppBar = false
+                                CharacterDetailsScreen(
+                                    characterID = args.numberId,
+                                    onError = { navController.popBackStack() })
                             }
                         }
                     }

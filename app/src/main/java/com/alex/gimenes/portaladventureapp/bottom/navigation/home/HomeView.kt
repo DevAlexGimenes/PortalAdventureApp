@@ -33,11 +33,11 @@ fun HomeScreenView(
             contentDescription = "Rick and Morty Image"
         )
         Spacer(modifier = Modifier.padding(top = 50.dp))
-        ButtonLargeView(text = "Search characters", icon = Icons.Default.Search) {
-            onSearchCharacter()
-        }
         ButtonLargeView(text = "Random", icon = ImageVector.vectorResource(id = R.drawable.ic_shuffle) ) {
             onRandomCharacter()
+        }
+        ButtonLargeView(text = "Search characters", icon = Icons.Default.Search) {
+            onSearchCharacter()
         }
     }
 }
