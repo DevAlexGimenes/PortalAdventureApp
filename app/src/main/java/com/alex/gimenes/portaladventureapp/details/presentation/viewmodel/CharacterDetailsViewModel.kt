@@ -22,14 +22,12 @@ class CharacterDetailsViewModel @Inject constructor(
 
     fun getCharacterWithID(characterID: Int) {
         viewModelScope.launch {
-            _validationEvent.value = State.Loading(true)
-            try {
-                val response = characterDetailsWithIDRepository.getCharacterWithID(characterID)
-                delay(3000)
-                _validationEvent.value = State.Success(response)
-            } catch (e: Exception) {
-                _validationEvent.value = State.Error(e)
-            }
+            _validationEvent.postValue(State.Loading(true))
+            _validationEvent.postValue(
+                characterDetailsWithIDRepository.getCharacterWithID(
+                    characterID
+                )
+            )
         }
     }
 }

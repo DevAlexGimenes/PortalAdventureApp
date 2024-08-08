@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alex.gimenes.portaladventureapp.common.state.State
 import com.alex.gimenes.portaladventureapp.selection.random.domain.RandomNumberIDUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,12 +19,12 @@ class RandomCharacterViewModel @Inject constructor(
     val randomNumber: LiveData<Int> = _randomNumber
 
     init {
-        _randomNumber.value = 0
+        _randomNumber.postValue(0)
     }
 
     fun randomNumberIDOfCharacter() {
         viewModelScope.launch {
-            _randomNumber.value = randomNumberIDUseCase.invoke()
+            _randomNumber.postValue(randomNumberIDUseCase.invoke())
         }
     }
 }
