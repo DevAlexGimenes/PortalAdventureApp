@@ -1,5 +1,7 @@
 # Portal Adventure
 
+
+
 ## Sobre
 <p>🇧🇷 Com o Portal Adventure Mergulhe no multiverso de Rick and Morty com nosso aplicativo temático. Com uma vasta coleção de 826 personagens, você pode explorar uma seleção aleatória e detalhada de cada um deles. Descubra curiosidades fascinantes e informações exclusivas sobre todos os personagens diretamente na tela de detalhes. Não perca a chance de aprofundar seu conhecimento e se surpreender com os segredos do universo Rick and Morty!</p>
 
@@ -50,6 +52,10 @@ No projeto estamos utilizando no CI/CD o Bitrise para automatizar os seguintes p
 link do Bitrise - https://app.bitrise.io/app/9162a1db-99da-4603-a88a-55f1c91759a2
 
 <img width="920" alt="Captura de Tela 2024-08-05 às 17 36 35" src="https://github.com/user-attachments/assets/3ba4f303-c8b2-4a39-81e6-f2220fd75b57">
+
+## Testes Unitários
+
+<img width="1425" alt="Captura de Tela 2024-08-09 às 09 38 04" src="https://github.com/user-attachments/assets/ded22fe5-2b96-4e09-b1f5-269acf99cad5">
 
 ### Padrões do Git e GitHub
 
