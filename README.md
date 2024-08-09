@@ -1,8 +1,7 @@
 # Portal Adventure
-
-
-
 ## Sobre
+![rick_and_morty](https://github.com/user-attachments/assets/f794c536-4ca3-4905-87fc-38c63b2d22d9)
+
 <p>🇧🇷 Com o Portal Adventure Mergulhe no multiverso de Rick and Morty com nosso aplicativo temático. Com uma vasta coleção de 826 personagens, você pode explorar uma seleção aleatória e detalhada de cada um deles. Descubra curiosidades fascinantes e informações exclusivas sobre todos os personagens diretamente na tela de detalhes. Não perca a chance de aprofundar seu conhecimento e se surpreender com os segredos do universo Rick and Morty!</p>
 
 ## O que utilizei no projeto
